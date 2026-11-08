@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tajmul FC | Official Esports & Gaming Hub</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        esports: {
+                            neon: '#00ff66',
+                            cyan: '#00f0ff',
+                            purple: '#9333ea',
+                            dark: '#02040a',
+                            card: '#080d1a',
+                            gold: '#fbbf24'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #02040a;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .glow-neon {
+            box-shadow: 0 0 45px rgba(0, 255, 102, 0.4);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 45px rgba(0, 240, 255, 0.4);
+        }
+        .glow-gold {
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.35);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(0, 255, 102, 0.7);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(13, 20, 38, 0.85) 0%, rgba(6, 10, 20, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 255, 102, 0.6);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 12px 40px -10px rgba(0, 255, 102, 0.3);
+        }
+
+        .bg-cyber-grid {
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 102, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 102, 0.04) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+
+        .animated-border {
+            position: relative;
+            background: #080d1a;
+            border-radius: 1.5rem;
+            z-index: 1;
+        }
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #00ff66, #00f0ff, #9333ea, #fbbf24, #00ff66);
+            background-size: 400%;
+            border-radius: 1.6rem;
+            z-index: -1;
+            animation: borderAnim 10s linear infinite;
+        }
+        @keyframes borderAnim {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+    </style>
+</head>
+<body class="bg-[#02040a] text-slate-100 min-h-screen flex flex-col selection:bg-esports-neon selection:text-black">
+
+    <!-- Toast Notification Popup -->
+    <div id="toast" class="fixed top-6 right-6 z-50 transform translate-y-[-200%] transition-transform duration-300 ease-out bg-esports-neon text-black font-orbitron font-black px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-3 border-2 border-white text-sm">
+        <i class="fa-solid fa-circle-check text-2xl"></i>
+        <span id="toast-message">FC Mobile UID Copied Successfully!</span>
+    </div>
+
+    <!-- Top Navigation Header -->
+    <nav class="sticky top-0 z-40 bg-[#02040a]/90 backdrop-blur-xl border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Title Section -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+                    <div class="relative">
+                        <!-- Logo Image from provided link[span_0](start_span)[span_0](end_span) -->
+                        <img src="https://i.ibb.co.com/84j7qg5C/30611.jpg" alt="Tajmul FC Logo" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl object-cover border-2 border-amber-400 glow-gold">
+                        <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-esports-neon border-2 border-black rounded-full animate-pulse"></span>
+                    </div>
+                    <div>
+                        <span class="font-orbitron text-lg sm:text-xl font-black tracking-wider bg-gradient-to-r from-amber-300 via-esports-neon to-esports-cyan bg-clip-text text-transparent block">
+                            Tajmul FC
+                        </span>
+                        <span class="text-[10px] sm:text-xs text-slate-400 font-orbitron font-semibold tracking-wider block">
+                            (A FC Mobile Gamer, Creator & Editor)
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu Links -->
+                <div class="hidden md:flex items-center space-x-8 font-orbitron text-xs tracking-widest uppercase font-bold text-slate-300">
+                    <a href="#welcome" class="hover:text-esports-neon transition-colors">Home</a>
+                    <a href="#uid-card" class="hover:text-esports-neon transition-colors">Player ID</a>
+                    <a href="#social-hub" class="hover:text-esports-neon transition-colors">Social Links</a>
+                    <a href="#expertise" class="hover:text-esports-neon transition-colors">Skills</a>
+                </div>
+
+                <!-- YouTube Subscribe CTA -->
+                <div>
+                    <a href="https://youtube.com/shorts/M7O1VaxWAJU?si=ihIbGyJ6FOOHapEH" target="_blank" class="bg-gradient-to-r from-red-600 via-red-500 to-red-600 hover:scale-105 text-white font-orbitron font-black px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-xs tracking-wider flex items-center space-x-2 shadow-xl hover:shadow-red-500/40 transition-all">
+                        <i class="fa-brands fa-youtube text-base"></i>
+                        <span>SUBSCRIBE</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Body -->
+    <main class="flex-grow">
+        
+        <!-- Welcome Section -->
+        <section id="welcome" class="relative py-20 sm:py-32 overflow-hidden bg-cyber-grid border-b border-slate-800/80 text-center">
+            <!-- Background Orbs -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-esports-neon/10 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-[350px] h-[350px] bg-esports-cyan/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                
+                <!-- Logo Showcase Big Banner -->
+                <div class="mb-8 flex justify-center">
+                    <div class="relative p-2 rounded-3xl bg-gradient-to-tr from-amber-500 via-esports-neon to-esports-cyan glow-gold inline-block">
+                        <img src="https://i.ibb.co.com/84j7qg5C/30611.jpg" alt="Tajmul FC Official Logo" class="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl object-cover shadow-2xl">
+                    </div>
+                </div>
+
+                <!-- Welcome Heading -->
+                <h1 class="font-orbitron text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white mb-6 uppercase text-glow">
+                    Welcome To The Official Website Of <span class="bg-gradient-to-r from-amber-400 via-esports-neon to-esports-cyan bg-clip-text text-transparent">Tajmul FC !</span>
+                </h1>
+
+                <!-- Subtitle Description -->
+                <p class="max-w-2xl mx-auto text-slate-300 text-base sm:text-xl font-medium leading-relaxed mb-10">
+                    Pro EA SPORTS FC Mobile Gamer, Video Editor & Content Creator. Explore all official social channels, check in-game player ID, and join the elite community!
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <a href="#social-hub" class="w-full sm:w-auto bg-gradient-to-r from-esports-neon via-emerald-400 to-esports-cyan hover:scale-105 text-black font-orbitron font-black px-8 py-4 rounded-2xl text-sm tracking-wider uppercase shadow-2xl glow-neon transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-fire text-lg"></i>
+                        <span>Explore Social Links</span>
+                    </a>
+                    <a href="#uid-card" class="w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-orbitron font-bold px-8 py-4 rounded-2xl text-sm tracking-wider uppercase transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-id-card text-esports-cyan text-lg"></i>
+                        <span>FC Mobile UID Card</span>
+                    </a>
+                </div>
+
+                <!-- Feature Highlighting Badges -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="glass-card p-5 rounded-2xl text-center">
+                        <div class="font-orbitron text-xl sm:text-2xl font-black text-amber-400">FC MOBILE</div>
+                        <div class="text-xs text-slate-400 font-semibold mt-1 uppercase">Pro Gamer</div>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl text-center">
+                        <div class="font-orbitron text-xl sm:text-2xl font-black text-esports-cyan">EDITOR</div>
+                        <div class="text-xs text-slate-400 font-semibold mt-1 uppercase">CapCut & FX</div>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl text-center">
+                        <div class="font-orbitron text-xl sm:text-2xl font-black text-esports-neon">SHORTS</div>
+                        <div class="text-xs text-slate-400 font-semibold mt-1 uppercase">YouTube Creator</div>
+                    </div>
+                    <div class="glass-card p-5 rounded-2xl text-center">
+                        <div class="font-orbitron text-xl sm:text-2xl font-black text-purple-400">COMMUNITY</div>
+                        <div class="text-xs text-slate-400 font-semibold mt-1 uppercase">Esports Hub</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FC Mobile UID & IGN Card Section -->
+        <section id="uid-card" class="py-20 bg-[#050914] relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-12">
+                    <h2 class="font-orbitron text-3xl sm:text-5xl font-black text-white tracking-wide">
+                        FC MOBILE <span class="text-esports-neon text-glow">PLAYER ID</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2">Add Tajmul FC directly in EA SPORTS FC Mobile</p>
+                </div>
+
+                <div class="max-w-xl mx-auto">
+                    <div class="animated-border p-8 sm:p-10 shadow-2xl">
+                        
+                        <!-- Badge Header -->
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-5 mb-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 text-2xl">
+                                    <i class="fa-solid fa-crown"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-orbitron text-base sm:text-lg font-black text-white">EA SPORTS FC™ MOBILE</h3>
+                                    <span class="text-xs text-slate-400 font-mono">VERIFIED CREATOR PROFILE</span>
+                                </div>
+                            </div>
+                            <span class="bg-esports-neon/10 text-esports-neon border border-esports-neon/30 text-xs px-3 py-1 rounded-full font-bold font-orbitron">ONLINE</span>
+                        </div>
+
+                        <!-- Card Details -->
+                        <div class="space-y-4">
+                            <!-- IGN -->
+                            <div class="flex items-center justify-between bg-slate-900/90 p-4 rounded-xl border border-slate-800">
+                                <span class="text-slate-400 text-sm font-semibold">In-Game Name (IGN):</span>
+                                <span class="font-orbitron text-base sm:text-lg font-black text-esports-cyan">TajmulEditz</span>
+                            </div>
+
+                            <!-- UID with Copy Button -->
+                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-slate-900/90 p-4 rounded-xl border border-slate-800 gap-3">
+                                <div>
+                                    <span class="text-slate-400 text-xs font-semibold block uppercase">FC Mobile UID:</span>
+                                    <span id="uid-text" class="font-mono text-sm sm:text-base font-bold text-esports-neon tracking-wider">1122834582519906304</span>
+                                </div>
+                                <button onclick="copyUID()" class="w-full sm:w-auto bg-gradient-to-r from-esports-neon to-esports-cyan hover:scale-105 text-black font-orbitron font-extrabold px-5 py-2.5 rounded-xl text-xs tracking-wider flex items-center justify-center space-x-2 transition-all shadow-lg active:scale-95">
+                                    <i class="fa-regular fa-copy text-sm"></i>
+                                    <span>COPY UID</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 text-center text-xs text-slate-400 font-medium">
+                            Click 'COPY UID' and paste it inside FC Mobile Friend Search to send a request!
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Social Media Hub Section -->
+        <section id="social-hub" class="py-20 bg-[#02040a] relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-14">
+                    <h2 class="font-orbitron text-3xl sm:text-5xl font-black text-white">
+                        SOCIAL MEDIA <span class="text-amber-400">HUBS</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2">Connect with Tajmul FC across all official platforms</p>
+                </div>
+
+                <!-- Grid of Social Channels -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- YouTube -->
+                    <a href="https://youtube.com/shorts/M7O1VaxWAJU?si=ihIbGyJ6FOOHapEH" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-500 text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-youtube"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-red-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-red-400 transition-colors">YouTube Shorts</h3>
+                            <p class="text-slate-400 text-xs mt-1">Watch viral FC Mobile gameplay & edits.</p>
+                        </div>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/tajmul_fc?mdxt=MTE0MzZ3Zmx3OWplcQ==" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-pink-600/20 border border-pink-500/30 flex items-center justify-center text-pink-500 text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-pink-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-pink-400 transition-colors">Instagram</h3>
+                            <p class="text-slate-400 text-xs mt-1">@tajmul_fc - Daily posts & reels.</p>
+                        </div>
+                    </a>
+
+                    <!-- WhatsApp Channel -->
+                    <a href="https://whatsapp.com/channel/0029VbDLmg923n3fqqzvDc2y" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-esports-neon/20 border border-esports-neon/30 flex items-center justify-center text-esports-neon text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-esports-neon text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-esports-neon transition-colors">WhatsApp Channel</h3>
+                            <p class="text-slate-400 text-xs mt-1">Get instant announcements & updates.</p>
+                        </div>
+                    </a>
+
+                    <!-- Discord Server -->
+                    <a href="https://discord.gg/qHuGtjJPt" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-discord"></i>
+                            </div>
+                                                     <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-indigo-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">Discord Server</h3>
+                            <p class="text-slate-400 text-xs mt-1">Chat & play matches with community.</p>
+                        </div>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/1A2oUz4G1Q/" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-500 text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-facebook"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-blue-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-blue-400 transition-colors">Facebook Page</h3>
+                            <p class="text-slate-400 text-xs mt-1">Official gaming updates & news.</p>
+                        </div>
+                    </a>
+
+                    <!-- Telegram -->
+                    <a href="https://t.me/tajmul_fc" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-cyan-600/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-telegram"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-cyan-400 text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">Telegram Channel</h3>
+                            <p class="text-slate-400 text-xs mt-1">Join for direct links & media.</p>
+                        </div>
+                    </a>
+
+                    <!-- X (Twitter) -->
+                    <a href="https://x.com/TajmulFC" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-slate-700/30 border border-slate-500/30 flex items-center justify-center text-white text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-slate-300 transition-colors">X (Twitter)</h3>
+                            <p class="text-slate-400 text-xs mt-1">@TajmulFC - Esports tweets & thoughts.</p>
+                        </div>
+                    </a>
+
+                    <!-- Pinterest -->
+                    <a href="https://pin.it/1WYnXlxKH" target="_blank" class="glass-card p-6 rounded-2xl flex flex-col justify-between group">
+                        <div class="flex items-center justify-between w-full mb-6">
+                            <div class="w-14 h-14 rounded-2xl bg-red-700/20 border border-red-600/30 flex items-center justify-center text-red-600 text-3xl group-hover:scale-110 transition-transform">
+                                <i class="fa-brands fa-pinterest"></i>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-slate-600 group-hover:text-red-500 text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-orbitron text-lg font-bold text-white group-hover:text-red-500 transition-colors">Pinterest</h3>
+                            <p class="text-slate-400 text-xs mt-1">Gaming thumbnails & graphic edits.</p>
+                        </div>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Expertise / Skills Section -->
+        <section id="expertise" class="py-20 bg-[#080d1a] border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-12">
+                    <h2 class="font-orbitron text-3xl sm:text-4xl font-black text-white">
+                        CREATOR <span class="text-esports-neon">EXPERTISE</span>
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-2">What powers Tajmul FC content creation</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass-card p-8 rounded-2xl">
+                        <div class="text-esports-neon text-3xl mb-4"><i class="fa-solid fa-gamepad"></i></div>
+                        <h3 class="font-orbitron text-xl font-bold text-white mb-2">FC Mobile Gameplay</h3>
+                        <p class="text-slate-400 text-sm">Mastering skill moves, squad building & division rivals matches.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl">
+                        <div class="text-esports-cyan text-3xl mb-4"><i class="fa-solid fa-film"></i></div>
+                        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Shorts & Video Editing</h3>
+                        <p class="text-slate-400 text-sm">High-energy edits, beat syncs & mobile video production.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl">
+                        <div class="text-purple-400 text-3xl mb-4"><i class="fa-solid fa-users"></i></div>
+                        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Community Building</h3>
+                        <p class="text-slate-400 text-sm">Active engagement across Discord, WhatsApp & social media channels.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#02040a] border-t border-slate-800/80 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center space-x-3">
+                <img src="https://i.ibb.co.com/84j7qg5C/30611.jpg" alt="Logo" class="w-10 h-10 rounded-xl object-cover border border-amber-400">
+                <span class="font-orbitron text-lg font-bold text-white">TAJMUL FC</span>
+            </div>
+            
+            <p class="text-slate-500 text-xs font-mono text-center">
+                © 2026 TAJMUL FC. All Rights Reserved. Official International Esports Creator Portal.
+            </p>
+
+            <div class="flex space-x-5 text-slate-400 text-lg">
+                <a href="https://youtube.com/shorts/M7O1VaxWAJU?si=ihIbGyJ6FOOHapEH" target="_blank" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/tajmul_fc?mdxt=MTE0MzZ3Zmx3OWplcQ==" target="_blank" class="hover:text-pink-500 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://discord.gg/qHuGtjJPt" target="_blank" class="hover:text-indigo-400 transition-colors"><i class="fa-brands fa-discord"></i></a>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Copy UID JavaScript -->
+    <script>
+        function copyUID() {
+            const uidText = document.getElementById('uid-text').innerText;
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(uidText).then(() => {
+                    showToast("FC Mobile UID Copied: " + uidText);
+                }).catch(() => {
+                    fallbackCopy(uidText);
+                });
+            } else {
+                fallbackCopy(uidText);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast("FC Mobile UID Copied: " + text);
+            } catch (err) {
+                showToast("Failed to copy UID");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.innerText = message;
+            toast.classList.remove('translate-y-[-200%]');
+            toast.classList.add('translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0');
+                toast.classList.add('translate-y-[-200%]');
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>
